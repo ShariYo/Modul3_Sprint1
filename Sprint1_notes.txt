@@ -1,0 +1,28 @@
+=====================================Machine Learning=====================================
+
+Supervised - has labels and classified
+Unsupervised - doesn't has labels and not classified. Creates patters of the given data
+Reinforcement learning - use past experience to choose patters in the present
+
+Classification - labelling new examples with the appropriate class. Used for categorical data
+Regression - used for numeric continuous data
+
+
+Linear models such as logistic regression generally benefit from scaling the features 
+while other models such as decision trees do not need such preprocessing (but would not suffer from it).
+
+We show how to apply such normalization using a scikit-learn transformer called StandardScaler. 
+This transformer shifts and scales each feature individually so that they all have a 0-mean and 
+a unit standard deviation.
+Once we have called the fit method, we can perform data transformation by calling the method transform.
+Finally, the method fit_transform is a shorthand method to call successively fit and then transform.
+
+scaler = StandardScaler().set_output(transform="pandas")
+data_train_scaled = scaler.fit_transform(data_train)
+
+IMPORTANT------------
+
+OneHotEncoder: always does something meaningful, but can be unnecessary slow with trees.
+OrdinalEncoder: can be detrimental for linear models unless your category has a meaningful 
+order and you make sure that OrdinalEncoder respects this order. 
+Trees can deal with OrdinalEncoder fine as long as they are deep enough.
