@@ -112,11 +112,3 @@ def f_boxplot(
     plt.legend().remove()
 
     return plt.show()
-
-
-# volatile acidity
-# citric acid
-# residual sugar
-# sulphates
-# alcohol
-# chlorides?
