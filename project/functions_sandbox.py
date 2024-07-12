@@ -112,3 +112,26 @@ def f_boxplot(
     plt.legend().remove()
 
     return plt.show()
+
+
+def f_displot(
+    data=None,
+    xaxis=None,
+    yaxis=None,
+    hue=None,
+    multiple="stack",
+    title=None,
+    xlabel=None,
+    ylabel=None,
+    figsize=(5, 3),
+):
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    sns.displot(data=data, x=xaxis, hue=hue, multiple=multiple)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title, size=14, fontweight="bold", ha="center")
+    plt.tight_layout()
+
+    return plt.show()
