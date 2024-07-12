@@ -135,3 +135,16 @@ def f_displot(
     plt.tight_layout()
 
     return plt.show()
+
+
+def f_heatmap(data, figsize=(6, 4), title=None):
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import numpy as np
+
+    plt.figure(figsize=figsize)
+    mask = np.triu(np.ones_like(data.corr()))
+    sns.heatmap(data, annot=True, cmap="Greens", mask=mask, center=0)
+    plt.title(title, size=14, fontweight="bold", ha="center")
+
+    return plt.show()
