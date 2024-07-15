@@ -28,13 +28,23 @@ def calc_vif(x):
 
 
 def remove_outliers_iqr(df, column):
-    Q1 = df[column].quantile(0.25)
-    Q3 = df[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
+    # Check if column is a list
+    if isinstance(column, str):
+        column = [column]
 
-    return df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
+    # remove outliers
+    clean = df.copy()
+    for col in column:
+        Q1 = clean[col].quantile(0.25)
+        Q3 = clean[col].quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        outliers = clean[(clean[col] < lower_bound) | (clean[col] > upper_bound)]
+        print(f"Outliers of {col} removed: \n{outliers}")
+        clean = clean[(clean[col] >= lower_bound) & (clean[col] <= upper_bound)]
+
+    return clean
 
 
 def reg_formula(model, X):
