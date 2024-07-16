@@ -1,3 +1,10 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+
 def cleaner(df, info=True):
     df = df.copy()
     df.columns = df.columns.str.strip()
@@ -17,9 +24,6 @@ def cleaner(df, info=True):
 
 
 def calc_vif(x):
-    from statsmodels.stats.outliers_influence import variance_inflation_factor
-    import pandas as pd
-
     vif = pd.DataFrame()
     vif["variables"] = x.columns
     vif["VIF"] = [variance_inflation_factor(x.values, i) for i in range(x.shape[1])]
@@ -59,9 +63,6 @@ def reg_formula(model, X):
 def f_histogram(
     xaxis, bins=20, kde=False, figsize=(6, 4), label=None, xlabel=None, title=None
 ):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
     plt.figure(figsize=figsize)
     sns.histplot(x=xaxis, bins=bins, label=label, kde=kde)
     plt.xlabel(xlabel)
@@ -72,8 +73,6 @@ def f_histogram(
 
 
 def f_barplot(xaxis, figsize=(6, 4), xlabel=None, title=None):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
 
     plt.figure(figsize=figsize)
     sns.set_palette("crest")
@@ -84,7 +83,7 @@ def f_barplot(xaxis, figsize=(6, 4), xlabel=None, title=None):
     ax.axes.get_xaxis().set_visible(True)
     ax.set_frame_on(False)
     plt.tight_layout()
-    plt.xticks(rotation=45)
+    plt.xticks(rotation=0)
     plt.xlabel(xlabel)
     plt.title(title, size=14, fontweight="bold", ha="center")
     plt.legend()
@@ -102,9 +101,6 @@ def f_boxplot(
     ylabel=None,
     title=None,
 ):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
     plt.figure(figsize=figsize)
     sns.boxplot(
         data=data,
@@ -135,9 +131,6 @@ def f_displot(
     ylabel=None,
     figsize=(5, 3),
 ):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
     sns.displot(data=data, x=xaxis, hue=hue, multiple=multiple)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -148,10 +141,6 @@ def f_displot(
 
 
 def f_heatmap(data, figsize=(6, 4), title=None):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    import numpy as np
-
     plt.figure(figsize=figsize)
     mask = np.triu(np.ones_like(data.corr()))
     sns.heatmap(data, annot=True, cmap="Greens", mask=mask, center=0)
